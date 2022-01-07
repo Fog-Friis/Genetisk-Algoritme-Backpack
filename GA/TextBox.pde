@@ -32,8 +32,6 @@ class TextBox {
 
   //display and run textbox
   void display() {
-    pushMatrix();
-    translate(0, scroll);
     // DRAWING THE BACKGROUND
     if (selected) {
       fill(BackgroundSelected);
@@ -90,11 +88,7 @@ class TextBox {
 
   //add text to textbox
   private void addText(char text) {    
-    while (textWidth(Text+text)*TEXTSIZE/48*size.x/400 > size.x-15) {
-      TEXTSIZE--;
-    }
-
-    if (textWidth(Text+text)*TEXTSIZE/48*size.x/400 < size.x-15) {
+    if (textWidth(Text+text) < size.x-30) {
       Text += text;
       TextLength++;
     }
@@ -106,9 +100,6 @@ class TextBox {
     if (TextLength - 1 >= 0) {
       Text = Text.substring(0, TextLength - 1);
       TextLength--;
-      if (textWidth(Text)*TEXTSIZE/48*size.x/400 < size.x-15*size.x/400*size.x/400 && TEXTSIZE <= 48) {
-        TEXTSIZE++;
-      }
     }
   }
 
