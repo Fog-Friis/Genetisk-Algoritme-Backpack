@@ -8,14 +8,32 @@ float mutationRate;
 Population population;
 PVector objects[];
 
-Button Simulate;
+ArrayList<TextBox> textBoxes = new ArrayList<TextBox>();
+ArrayList<Button> buttons = new ArrayList<Button>();
+
+Button Start, Save;
+TextBox populationTB, mutationRateTB;
 
 void setup() {
-  size(640, 360);
+  frameRate(400);
+  fullScreen();
   f = createFont("Courier", 32, true);
   popmax = 150;
-  mutationRate = 0.01;
-  
+
+  populationTB = new TextBox(new PVector(350, 50), new PVector(400, 70));
+  mutationRateTB = new TextBox(new PVector(350, 150), new PVector(400, 70));
+  textBoxes.add(populationTB);
+  textBoxes.add(mutationRateTB);
+
+  Start = new Button(new PVector(1000, 60), new PVector(150, 50), 20, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Start", 50);
+  Save = new Button(new PVector(800, 60), new PVector(150, 50), 20, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Save", 50);
+  buttons.add(Start);
+  buttons.add(Save);
+
+  mutationRate = 0.1; 
+  mutationRateTB.Text = String.valueOf(mutationRate*100);
+  populationTB.Text = String.valueOf(popmax);
+
   objects = new PVector[24];
   objects[0] = new PVector(90,150);
   objects[1] = new PVector(130,35);
@@ -42,25 +60,38 @@ void setup() {
   objects[22] = new PVector(900,1);
   objects[23] = new PVector(2000,150);
 
-  Simulate = new Button(new PVector(width / 2, height / 2), new PVector(100, 50), 10, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "simulate", 20);
-
   // Create a populationation with a target phrase, mutation rate, and populationation max
   population = new Population(mutationRate, popmax);
 }
 
 void mousePressed() {
-  Simulate.pressed();
+  for (Button b : buttons) b.pressed();
+  for (TextBox t : textBoxes) t.pressed(mouseX, mouseY);
+}
+
+void keyPressed() {
+  for (TextBox t : textBoxes) {
+    if (t.keyWasTyped(key, (int)keyCode));
+  }
 }
 
 void draw() {
+  background(255);
 
-  if (Simulate.clicked) {
+  if (Start.clicked) {
     simulate = !simulate;
   }
 
-  println(Simulate.clicked);
+  if (Save.clicked) {
+    simulate = false;
+  }
 
   if (simulate) {
+
+    Start.Text = "Stop";
+    Start.col = color(255, 0, 0);
+    Start.overCol = color(180, 0, 0);
+
     // Generate mating pool
     population.naturalSelection();
     //Create next generation
@@ -74,15 +105,26 @@ void draw() {
       println(millis()/1000.0);
       noLoop();
     }
+  } else {
+    Start.Text = "Start";
+    Start.col = color(0, 0, 255);
+    Start.overCol = color(0, 0, 180);
   }
-  Simulate.display();
+
+  textSize(48);
+  text("Population:", 0, populationTB.position.y+50);
+  text("Mutation Rate:", 0, mutationRateTB.position.y+50);
+  text("%", mutationRateTB.position.x+mutationRateTB.size.x+10, mutationRateTB.position.y+50);
+
+  for (TextBox t : textBoxes) t.display();
+  for (Button b : buttons) b.display();
 }
 
 void displayInfo() {
   background(255);
   // Display current status of populationation
   String answer = population.getBest();
-  textFont(f);
+  //textFont(f);
   textAlign(LEFT);
   fill(0);
 
