@@ -84,6 +84,9 @@ void draw() {
 
   if (Save.clicked) {
     simulate = false;
+    mutationRate = float(mutationRateTB.Text);
+    popmax = int(populationTB.Text);
+    population = new Population(mutationRate, popmax);
   }
 
   if (simulate) {
