@@ -1,5 +1,6 @@
 PFont f;
-String target;
+int score;
+int weight;
 int popmax;
 float mutationRate;
 Population population;
@@ -8,7 +9,6 @@ PVector objects[];
 void setup() {
   size(640, 360);
   f = createFont("Courier", 32, true);
-  target = "OH MY GOD, I'm going to cum!";
   popmax = 150;
   mutationRate = 0.01;
   
@@ -39,7 +39,7 @@ void setup() {
   objects[24] = new PVector(2000,150);
 
   // Create a populationation with a target phrase, mutation rate, and populationation max
-  population = new Population(target, mutationRate, popmax);
+  population = new Population(mutationRate, popmax);
 }
 
 void draw() {

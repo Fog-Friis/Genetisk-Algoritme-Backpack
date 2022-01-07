@@ -1,35 +1,61 @@
+// The Nature of Code
+// Daniel Shiffman
+// http://natureofcode.com
+
+// Genetic Algorithm, Evolving Shakespeare
+
+// A class to describe a psuedo-DNA, i.e. genotype
+//   Here, a virtual organism's DNA is an array of character.
+//   Functionality:
+//      -- convert DNA into a string
+//      -- calculate DNA's "fitness"
+//      -- mate DNA with another set of DNA
+//      -- mutate DNA
+
+
 class DNA {
 
   // The genetic sequence
-  char[] genes;
-  
+  boolean[] genes;
+  boolean RB;
+  int randomNUM;
   float fitness;
   
   // Constructor (makes a random DNA)
   DNA(int num) {
-    genes = new char[num];
+    genes = new boolean[num];
     for (int i = 0; i < genes.length; i++) {
-      genes[i] = (char) random(32,128);  // Pick from range of chars
+      randomNUM = (int)random(0,1);
+      if (randomNUM ==1){
+      genes[i]=false;
+      }else {}
+      genes[i] = true;  // Pick from range of chars
     }
   }
   
   // Converts character array to a String
+  /*
   String getPhrase() {
     return new String(genes);
   }
-  
+  */
   // Fitness function (returns floating point % of "correct" characters)
-  void fitness (String target) {
-     int score = 0;
+  void fitness (int score) {
+     int localscore = 0;
+     int localweight = 0;
      for (int i = 0; i < genes.length; i++) {
-        if (genes[i] == target.charAt(i)) {
-          score++;
-        }
+       if (genes[i] == true){ 
+       localscore += objects[i].x;
+       localweight += objects[i].y;
+       }
      }
+     if (localweight > 5000)
+     { fitness = 0;
+     }else{
      
-     
-     fitness = (float)score / (float)target.length();
+     fitness = (float)localscore;
   }
+}
   
   // Crossover
   DNA crossover(DNA partner) {
@@ -50,8 +76,12 @@ class DNA {
   void mutate(float mutationRate) {
     for (int i = 0; i < genes.length; i++) {
       if (random(1) < mutationRate) {
-        genes[i] = (char) random(32,128);
-      }
+         randomNUM = (int)random(0,1);
+      if (randomNUM ==1){
+      genes[i]=false;
+      }else {}
+      genes[i] = true;  // Pick from range of chars
+    }
     }
   }
-}
+ }
