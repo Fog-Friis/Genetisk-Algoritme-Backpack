@@ -84,7 +84,8 @@ void draw() {
 
   if (Save.clicked) {
     simulate = false;
-    mutationRate = float(mutationRateTB.Text);
+    mutationRate = float(mutationRateTB.Text + "f")/100;
+    println(mutationRate);
     popmax = int(populationTB.Text);
     population = new Population(mutationRate, popmax);
   }
@@ -124,6 +125,9 @@ void draw() {
 }
 
 void displayInfo() {
+  pushMatrix();
+  translate(width/2, height/2);
+  
   background(255);
   // Display current status of populationation
 
@@ -139,8 +143,11 @@ void displayInfo() {
   text("total generations:     " + population.getGenerations(), 20, 160);
   text("average fitness:       " + nf(population.getAverageFitness(), 0, 2), 20, 180);
   text("total population: " + popmax, 20, 200);
-  text("mutation rate:         " + int(mutationRate * 100) + "%", 20, 220);
+  text("mutation rate:         " + mutationRate * 100 + "%", 20, 220);
 
   textSize(10);
+  
+  translate(0,0);
+  popMatrix();
 
 }

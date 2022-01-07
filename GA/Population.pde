@@ -12,7 +12,7 @@ class Population {
     mutationRate = m;
     population = new DNA[num];
     for (int i = 0; i < population.length; i++) {
-      population[i] = new DNA(target.length());
+      population[i] = new DNA(objects.length);
     }
     calcFitness();
     matingPool = new ArrayList<DNA>();
