@@ -3,4 +3,4 @@ Stop metode/Knap
 Fix genes 
 Fix fitness
 fix averagescore
-
+Ikke lav en poplulation på 0
