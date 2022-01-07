@@ -1,0 +1,6 @@
+Visuel måde at læse data
+Stop metode/Knap
+Fix genes 
+Fix fitness
+fix averagescore
+

@@ -50,8 +50,8 @@ class DNA {
     int localweight = 0;
     for (int i = 0; i < genes.length; i++) {
       if (genes[i] == true) { 
-        localscore += objects[i].x;
-        localweight += objects[i].y;
+        localscore += objects[i].y;
+        localweight += objects[i].x;
       }
     }
     if (localweight > 5000)
