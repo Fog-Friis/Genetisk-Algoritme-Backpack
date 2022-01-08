@@ -4,7 +4,7 @@ class DNA {
   boolean[] genes;
   boolean RB;
   int randomNUM;
-  float fitness;
+  public float fitness;
 
   // Constructor (makes a random DNA)
   DNA(int num) {
@@ -45,6 +45,7 @@ class DNA {
      }else{
      
      fitness = (float)localscore;
+     }}
   void fitness (int score) {
     int localscore = 0;
     int localweight = 0;

@@ -35,30 +35,30 @@ void setup() {
   populationTB.Text = String.valueOf(popmax);
 
   objects = new PVector[24];
-  objects[0] = new PVector(90,150);
-  objects[1] = new PVector(130,35);
-  objects[2] = new PVector(1530,200);
-  objects[3] = new PVector(500,160);
-  objects[4] = new PVector(150,60);
-  objects[5] = new PVector(680,45);
-  objects[6] = new PVector(270,60);
-  objects[7] = new PVector(390,40);
-  objects[8] = new PVector(230,30);
-  objects[9] = new PVector(520,10);
-  objects[10] = new PVector(110,70);
-  objects[11] = new PVector(320,30);
-  objects[12] = new PVector(240,15);
-  objects[13] = new PVector(480,10);
-  objects[14] = new PVector(730,40);
-  objects[15] = new PVector(420,70);
-  objects[16] = new PVector(430,75);
-  objects[17] = new PVector(220,80);
-  objects[18] = new PVector(70,20);
-  objects[19] = new PVector(180,12);
-  objects[20] = new PVector(40,50);
-  objects[21] = new PVector(300,10);
-  objects[22] = new PVector(900,1);
-  objects[23] = new PVector(2000,150);
+  objects[0] = new PVector(90, 150);
+  objects[1] = new PVector(130, 35);
+  objects[2] = new PVector(1530, 200);
+  objects[3] = new PVector(500, 160);
+  objects[4] = new PVector(150, 60);
+  objects[5] = new PVector(680, 45);
+  objects[6] = new PVector(270, 60);
+  objects[7] = new PVector(390, 40);
+  objects[8] = new PVector(230, 30);
+  objects[9] = new PVector(520, 10);
+  objects[10] = new PVector(110, 70);
+  objects[11] = new PVector(320, 30);
+  objects[12] = new PVector(240, 15);
+  objects[13] = new PVector(480, 10);
+  objects[14] = new PVector(730, 40);
+  objects[15] = new PVector(420, 70);
+  objects[16] = new PVector(430, 75);
+  objects[17] = new PVector(220, 80);
+  objects[18] = new PVector(70, 20);
+  objects[19] = new PVector(180, 12);
+  objects[20] = new PVector(40, 50);
+  objects[21] = new PVector(300, 10);
+  objects[22] = new PVector(900, 1);
+  objects[23] = new PVector(2000, 150);
 
   // Create a populationation with a target phrase, mutation rate, and populationation max
   population = new Population(mutationRate, popmax);
@@ -92,22 +92,28 @@ void draw() {
 
   if (simulate) {
 
-    Start.Text = "Stop";
-    Start.col = color(255, 0, 0);
-    Start.overCol = color(180, 0, 0);
+    if (int(populationTB.Text) != 0) {
+      Start.Text = "Stop";
+      Start.col = color(255, 0, 0);
+      Start.overCol = color(180, 0, 0);
 
-    // Generate mating pool
-    population.naturalSelection();
-    //Create next generation
-    population.generate();
-    // Calculate fitness
-    population.calcFitness();
-    displayInfo();
+      // Generate mating pool
+      population.naturalSelection();
+      //Create next generation
+      population.generate();
+      // Calculate fitness
+      population.calcFitness();
+      displayInfo();
 
-    // If we found the target phrase, stop
-    if (population.finished()) {
-      println(millis()/1000.0);
-      noLoop();
+      // If we found the target phrase, stop
+      if (population.finished()) {
+        println(millis()/1000.0);
+        noLoop();
+      }
+    } else {
+      fill(255, 0, 0);
+      text("Error: Please Type Population Size", 300, 350);
+      fill(0);
     }
   } else {
     Start.Text = "Start";
@@ -124,10 +130,16 @@ void draw() {
   for (Button b : buttons) b.display();
 }
 
+void graph() {
+  for (int i =0; i<population.population.length; i++) {
+    circle(population.getGenerations(), population.population[i].fitness, 10);
+  }
+}
+
 void displayInfo() {
   pushMatrix();
   translate(width/2, height/2);
-  
+
   background(255);
   // Display current status of populationation
 
@@ -146,8 +158,7 @@ void displayInfo() {
   text("mutation rate:         " + mutationRate * 100 + "%", 20, 220);
 
   textSize(10);
-  
-  translate(0,0);
-  popMatrix();
 
+  translate(0, 0);
+  popMatrix();
 }
