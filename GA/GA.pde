@@ -91,7 +91,7 @@ void draw() {
    // println(mutationRate);
     popmax = int(populationTB.Text);
     population = new Population(mutationRate, popmax);
-  }
+  } //<>//
 
   if (simulate) {
 
@@ -158,7 +158,7 @@ void displayInfo() {
   textSize(18);
   text("Total generations:     " + population.getGenerations(), 300, -440);
   if (firsttime == true){
-  text("Average fitness:        " + nf(population.getAverageFitness(), 0, 2), 300, -4200);
+  text("Average fitness:        " + nf(population.getAverageFitness(), 0, 2), 300, -420);
   text("Best score:                " + worldrecord, 300, -380);
   }
   else {
