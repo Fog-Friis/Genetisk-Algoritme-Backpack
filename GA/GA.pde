@@ -106,6 +106,7 @@ void draw() {
       population.generate();
       // Calculate fitness
       population.calcFitness();
+      population.getGenes();
       displayInfo();
 
       // If we found the target phrase, stop
@@ -158,7 +159,7 @@ void displayInfo() {
   textSize(18);
   text("Total generations:     " + population.getGenerations(), 300, -440);
   if (firsttime == true){
-  text("Average fitness:        " + nf(population.getAverageFitness(), 0, 2), 300, -4200);
+  text("Average fitness:        " + nf(population.getAverageFitness(), 0, 2), 300, -420);
   text("Best score:                " + worldrecord, 300, -380);
   }
   else {
@@ -167,6 +168,7 @@ void displayInfo() {
   }
   text("Total population:      " + popmax, 300, -400);
   text("Mutation rate:           " + mutationRate * 100 + "%", 300, -360);
+  text("Binary genecode:       "+ recordGenes, 300, -340);
   
   textSize(10);
 

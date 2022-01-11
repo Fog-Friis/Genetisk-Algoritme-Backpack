@@ -1,4 +1,5 @@
 float worldrecord;
+String recordGenes;
 class Population {
   float mutationRate;           // Mutation rate
   DNA[] population;             // Array to hold the current population
@@ -20,6 +21,12 @@ class Population {
     generations = 0;
     
     perfectScore = 1;
+  }
+  
+  void getGenes() {
+    for (int i = 0; i < population.length; i++) {
+      population[i].components();
+    }
   }
 
   // Fill our fitness array with a value for every member of the population
@@ -72,11 +79,12 @@ class Population {
 
   void wrecord() {
     worldrecord = 0.0;
-    int index = 0;
+    int index;
     for (int i = 0; i < population.length; i++) {
       if (population[i].fitness > worldrecord) {
         index = i;
         worldrecord = population[i].fitness;
+        recordGenes = population[i].components();
       }
   }
   return;
