@@ -7,6 +7,7 @@ int popmax;
 float mutationRate;
 Population population;
 PVector objects[];
+boolean firsttime = false;
 
 ArrayList<TextBox> textBoxes = new ArrayList<TextBox>();
 ArrayList<Button> buttons = new ArrayList<Button>();
@@ -80,12 +81,14 @@ void draw() {
 
   if (Start.clicked) {
     simulate = !simulate;
+    firsttime = true;
   }
 
   if (Save.clicked) {
     simulate = false;
+    firsttime = false;
     mutationRate = float(mutationRateTB.Text + "f")/100;
-    println(mutationRate);
+   // println(mutationRate);
     popmax = int(populationTB.Text);
     population = new Population(mutationRate, popmax);
   }
@@ -119,6 +122,7 @@ void draw() {
     Start.Text = "Start";
     Start.col = color(0, 0, 255);
     Start.overCol = color(0, 0, 180);
+    displayInfo();
   }
 
   textSize(48);
@@ -149,14 +153,21 @@ void displayInfo() {
 
 
   textSize(24);
-  text("Score::", 20, 30);
+  text("Score:", 300, -500);
   textSize(40);
   textSize(18);
-  text("total generations:     " + population.getGenerations(), 20, 160);
-  text("average fitness:       " + nf(population.getAverageFitness(), 0, 2), 20, 180);
-  text("total population: " + popmax, 20, 200);
-  text("mutation rate:         " + mutationRate * 100 + "%", 20, 220);
-  text("Best score:            " + worldrecord, 20, 240);
+  text("Total generations:     " + population.getGenerations(), 300, -440);
+  if (firsttime == true){
+  text("Average fitness:        " + nf(population.getAverageFitness(), 0, 2), 300, -4200);
+  text("Best score:                " + worldrecord, 300, -380);
+  }
+  else {
+  text("Average fitness:        " + 0, 300, -420);
+  text("Best score:                " + 0, 300, -380);
+  }
+  text("Total population:      " + popmax, 300, -400);
+  text("Mutation rate:           " + mutationRate * 100 + "%", 300, -360);
+  
   textSize(10);
 
   translate(0, 0);
