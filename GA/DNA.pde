@@ -10,16 +10,16 @@ class DNA {
   DNA(int num) {
     genes = new boolean[num];
     for (int i = 0; i < genes.length; i++) {
-      randomNUM = (int)random(0,1);
-      if (randomNUM ==1){
-      genes[i]=false;
-      }else {
       randomNUM = (int)random(0, 1);
       if (randomNUM ==1) {
         genes[i]=false;
       } else {
-      }
-      genes[i] = true;  // Pick from range of chars
+        randomNUM = (int)random(0, 1);
+        if (randomNUM ==1) {
+          genes[i]=false;
+        } else {
+        }
+        genes[i] = true;  // Pick from range of chars
       }
     }
   }
@@ -32,21 +32,6 @@ class DNA {
    */
   // Fitness function (returns floating point % of "correct" characters)
   void fitness () {
-     int localscore = 0;
-     int localweight = 0;
-     for (int i = 0; i < genes.length; i++) {
-       if (genes[i] == true){ 
-       localscore += objects[i].y;
-       localweight += objects[i].x;
-       }
-     }
-     if (localweight > 5000)
-     { fitness = 0;
-     }else{
-     
-     fitness = (float)localscore;
-     }}
-  void fitness (int score) {
     int localscore = 0;
     int localweight = 0;
     for (int i = 0; i < genes.length; i++) {
