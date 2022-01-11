@@ -113,6 +113,7 @@ void draw() {
         println(millis()/1000.0);
         noLoop();
       }
+      Graph();
     } else {
       fill(255, 0, 0);
       text("Error: Please Type Population Size", 300, 350);
@@ -172,4 +173,29 @@ void displayInfo() {
 
   translate(0, 0);
   popMatrix();
+}
+
+void Graph() {
+  fill(0);
+  textSize(10);
+
+  //1. akse
+  rect(180, height-170, width-380, 1);
+  triangle(width-200, height-170, width-220, height-180, width-220, height-160);
+  for (int i = 200; i<width-975; i+=25) {
+    rect(2*i-200, height-175, 1, 10);
+    text(i-200, 2*i-195, height-155);
+  }
+
+  //2. akse
+  rect(200, 250, 1, height-400);
+  triangle(210, 270, 200, 250, 190, 270);
+  for (int i = height-170; i>270; i-=25) {
+    rect(195, i, 10, 1);
+    text(2*(910-i), 160, i);
+  }
+
+  textSize(30);
+  text("generationer", width-400, height-100);
+  text("værdi", 50, 300);
 }
