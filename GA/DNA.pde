@@ -5,6 +5,7 @@ class DNA {
   boolean RB;
   int randomNUM;
   public float fitness;
+  public String recordGenes;
 
   // Constructor (makes a random DNA)
   DNA(int num) {
@@ -43,6 +44,18 @@ class DNA {
       fitness = (float)localscore;
     }
     
+  }
+  
+  String components(){
+    String binaryGenes = "";
+    for(int i=0; i<genes.length; i++){
+      if(genes[i])
+      binaryGenes += '1';
+      else
+      binaryGenes += '0';
+    }
+    recordGenes = (String)binaryGenes;
+    return recordGenes;
   }
 
   // Crossover

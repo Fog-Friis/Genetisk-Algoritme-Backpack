@@ -106,6 +106,7 @@ void draw() {
       population.generate();
       // Calculate fitness
       population.calcFitness();
+      population.getGenes();
       displayInfo();
 
       // If we found the target phrase, stop
@@ -168,6 +169,7 @@ void displayInfo() {
   }
   text("Total population:      " + popmax, 300, -400);
   text("Mutation rate:           " + mutationRate * 100 + "%", 300, -360);
+  text("Binary genecode:       "+ recordGenes, 300, -340);
   
   textSize(10);
 
