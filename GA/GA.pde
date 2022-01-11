@@ -91,7 +91,7 @@ void draw() {
    // println(mutationRate);
     popmax = int(populationTB.Text);
     population = new Population(mutationRate, popmax);
-  }
+  } //<>//
 
   if (simulate) {
 
