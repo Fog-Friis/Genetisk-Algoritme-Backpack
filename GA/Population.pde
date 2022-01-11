@@ -1,5 +1,5 @@
+float worldrecord;
 class Population {
-
   float mutationRate;           // Mutation rate
   DNA[] population;             // Array to hold the current population
   ArrayList<DNA> matingPool;    // ArrayList which we will use for our "mating pool"
@@ -25,8 +25,9 @@ class Population {
   // Fill our fitness array with a value for every member of the population
   void calcFitness() {
     for (int i = 0; i < population.length; i++) {
-      population[i].fitness(score);
+      population[i].fitness();
     }
+    wrecord();
   }
 
   // Generate a mating pool
@@ -69,6 +70,17 @@ class Population {
     generations++;
   }
 
+  void wrecord() {
+    worldrecord = 0.0;
+    int index = 0;
+    for (int i = 0; i < population.length; i++) {
+      if (population[i].fitness > worldrecord) {
+        index = i;
+        worldrecord = population[i].fitness;
+      }
+  }
+  return;
+}
 
   // Compute the current "most fit" member of the population
 

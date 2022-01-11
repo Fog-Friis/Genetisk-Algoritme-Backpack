@@ -139,7 +139,7 @@ void graph() {
 void displayInfo() {
   pushMatrix();
   translate(width/2, height/2);
-
+  
   background(255);
   // Display current status of populationation
 
@@ -156,7 +156,7 @@ void displayInfo() {
   text("average fitness:       " + nf(population.getAverageFitness(), 0, 2), 20, 180);
   text("total population: " + popmax, 20, 200);
   text("mutation rate:         " + mutationRate * 100 + "%", 20, 220);
-
+  text("Best score:            " + worldrecord, 20, 240);
   textSize(10);
 
   translate(0, 0);

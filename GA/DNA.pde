@@ -10,15 +10,10 @@ class DNA {
   DNA(int num) {
     genes = new boolean[num];
     for (int i = 0; i < genes.length; i++) {
-      randomNUM = (int)random(0, 1);
-      if (randomNUM ==1) {
+      randomNUM = (int)random(0, 10);
+      if (randomNUM <= 5) {
         genes[i]=false;
       } else {
-        randomNUM = (int)random(0, 1);
-        if (randomNUM ==1) {
-          genes[i]=false;
-        } else {
-        }
         genes[i] = true;  // Pick from range of chars
       }
     }
@@ -47,6 +42,7 @@ class DNA {
 
       fitness = (float)localscore;
     }
+    
   }
 
   // Crossover
