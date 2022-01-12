@@ -62,7 +62,7 @@ void setup() {
   objects[22] = new PVector(900, 1);
   objects[23] = new PVector(2000, 150);
 
-  // Create a populationation with a target phrase, mutation rate, and populationation max
+  //Laver en populationation med en mutation rate and populationation størrelse
   population = new Population(mutationRate, popmax);
 }
 
@@ -105,12 +105,13 @@ void draw() {
       population.naturalSelection();
       //Create next generation
       population.generate();
-      // Calculate fitness
+      // Udregner fitness og laver nye gener
       population.calcFitness();
       population.getGenes();
+      //Opdatter infomartion
       displayInfo();
 
-      // If we found the target phrase, stop
+      // If population finished
       if (population.finished()) {
         println(millis()/1000.0);
         noLoop();
