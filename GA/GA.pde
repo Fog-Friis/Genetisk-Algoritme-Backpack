@@ -1,8 +1,6 @@
 Boolean simulate = false;
 PImage logo;
 PFont f;
-int score;
-int weight;
 int popmax;
 float mutationRate;
 Population population;
@@ -91,11 +89,13 @@ void draw() {
     worldrecord = 0;
     simulate = false;
     firsttime = false;
-    mutationRate = float(mutationRateTB.Text + "f")/100; //<>//
+    mutationRate = float(mutationRateTB.Text + "f")/100; 
    // println(mutationRate);
-    popmax = int(populationTB.Text);
-   // population = new Population(mutationRate, popmax);
-  } //<>// //<>//
+    popmax = int(populationTB.Text); //<>//
+
+  } 
+
+  //<>//
 
   if (simulate) {
     if (firsttime == true){
