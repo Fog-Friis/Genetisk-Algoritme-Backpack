@@ -5,7 +5,7 @@ class Population {
   DNA[] population;             // Array to hold the current population
   ArrayList<DNA> matingPool;    // ArrayList which we will use for our "mating pool"
   String target;                // Target phrase
-  int jeanrations;              // Number of jeanrations
+  int generations;              // Number of generations
   boolean finished;             // Are we finished evolving?
   int perfectScore;
 
@@ -18,7 +18,7 @@ class Population {
     calcFitness();
     matingPool = new ArrayList<DNA>();
     finished = false;
-    jeanrations = 0;
+    generations = 0;
     
     perfectScore = 1;
   }
@@ -62,7 +62,7 @@ class Population {
     }
   }
 
-  // Create a new jeanration
+  // Create a new generation
   void jeanrate() {
     // Refill the population with children from the mating pool
     for (int i = 0; i < population.length; i++) {
@@ -74,7 +74,7 @@ class Population {
       child.mutate(mutationRate);
       population[i] = child;
     }
-    jeanrations++;
+    generations++;
   }
 
   void wrecord() {
@@ -96,8 +96,8 @@ class Population {
     return finished;
   }
 
-  int getjeanrations() {
-    return jeanrations;
+  int getgenerations() {
+    return generations;
   }
 
   // Compute average fitness for the population

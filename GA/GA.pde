@@ -102,7 +102,7 @@ void draw() {
 
       // jeanrate mating pool
       population.naturalSelection();
-      //Create next jeanration
+      //Create next generation
       population.jeanrate();
       // Calculate fitness
       population.calcFitness();
@@ -138,7 +138,7 @@ void draw() {
 
 void graph() {
   for (int i =0; i<population.population.length; i++) {
-    circle(population.getjeanrations(), population.population[i].fitness, 10);
+    circle(population.getgenerations(), population.population[i].fitness, 10);
   }
 }
 
@@ -158,7 +158,7 @@ void displayInfo() {
   text("Score:", 300, -500);
   textSize(40);
   textSize(18);
-  text("Total jeanrations:     " + population.getjeanrations(), 300, -440);
+  text("Total generations:     " + population.getgenerations(), 300, -440);
   if (firsttime == true){
   text("Average fitness:        " + nf(population.getAverageFitness(), 0, 2), 300, -420);
   text("Best score:                " + worldrecord, 300, -380);
