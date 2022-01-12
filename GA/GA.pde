@@ -1,4 +1,4 @@
-Boolean simulate = false;
+Boolean simulate = false, paused = false;
 PImage logo;
 PFont f;
 int popmax;
@@ -10,8 +10,9 @@ boolean firsttime = true;
 ArrayList<TextBox> textBoxes = new ArrayList<TextBox>();
 ArrayList<Button> buttons = new ArrayList<Button>();
 ArrayList<Datapoint> datapoints = new ArrayList<Datapoint>();
+ArrayList<Datapoint> datapoints2 = new ArrayList<Datapoint>();
 
-Button Start, Save;
+Button Start, Save, Pause;
 TextBox populationTB, mutationRateTB;
 
 void setup() {
@@ -27,8 +28,10 @@ void setup() {
 
   Start = new Button(new PVector(1000, 60), new PVector(150, 50), 20, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Start", 50);
   Save = new Button(new PVector(800, 60), new PVector(150, 50), 20, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Save", 50);
+  Pause = new Button(new PVector(1000, 160), new PVector(150, 50), 20, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Pause", 50);
   buttons.add(Start);
   buttons.add(Save);
+  buttons.add(Pause);
 
   mutationRate = 0.1; 
   mutationRateTB.Text = String.valueOf(mutationRate*100);
@@ -61,7 +64,7 @@ void setup() {
   objects[23] = new PVector(2000, 150);
 
   //Laver en populationation med en mutation rate and populationation størrelse
- // population = new Population(mutationRate, popmax);
+  // population = new Population(mutationRate, popmax);
 }
 
 void mousePressed() {
@@ -79,60 +82,71 @@ void draw() {
   background(255);
 
   if (Start.clicked) {
-    
     simulate = !simulate;
     firsttime = true;
-    
+    paused = false;
+    Pause.Text = "Pause";
   }
 
   if (Save.clicked) {
     worldrecord = 0;
     simulate = false;
     firsttime = false;
-    mutationRate = float(mutationRateTB.Text + "f")/100; 
-   // println(mutationRate);
-    popmax = int(populationTB.Text); //<>//
+    mutationRate = float(mutationRateTB.Text + "f")/100;  //<>//
+    popmax = int(populationTB.Text);
+  }
 
-  } 
-
-  //<>//
+  if (Pause.clicked) {
+    paused = !paused;
+  }
 
   if (simulate) {
-    if (firsttime == true){
-      worldrecord = 0;
-      population = new Population(mutationRate, popmax);
-      firsttime = false;
-  }
-    if (int(populationTB.Text) != 0) {
-      Start.Text = "Stop";
-      Start.col = color(255, 0, 0);
-      Start.overCol = color(180, 0, 0);
 
-      // Generate mating pool
-      
-      population.naturalSelection();
-      //Create next generation
-      population.generate();
-      // Udregner fitness og laver nye gener
-      population.calcFitness();
-      population.getGenes();
-      //Opdatter infomartion
-      
-      displayInfo();
-
-      // If population finished
-      if (population.finished()) {
-        println(millis()/1000.0);
-        noLoop();
+    if (!paused) {
+      if (firsttime == true) {
+        worldrecord = 0;
+        population = new Population(mutationRate, popmax);
+        firsttime = false;
       }
-      Graph();
+      if (int(populationTB.Text) != 0) {
+        Start.Text = "Stop";
+        Start.col = color(255, 0, 0);
+        Start.overCol = color(180, 0, 0);
+
+        // Generate mating pool
+
+        population.naturalSelection();
+        //Create next generation
+        population.generate();
+        // Udregner fitness og laver nye gener
+        population.calcFitness();
+        population.getGenes();
+        //Opdatter infomartion
+
+        displayInfo();
+
+        // If population finished
+        if (population.finished()) {
+          println(millis()/1000.0);
+          noLoop();
+        }
+        Graph();
+      } else {
+        fill(255, 0, 0);
+        text("Error: Please Type Population Size", 300, 350);
+        fill(0);
+      }
+      Pause.textSize = 50;
+      Pause.Text = "Pause";
     } else {
-      fill(255, 0, 0);
-      text("Error: Please Type Population Size", 300, 350);
-      fill(0);
+      Pause.textSize = 35;
+      Pause.Text = "Unpause";
+      Graph();
+      displayInfo();
     }
   } else {
     datapoints.clear();
+    datapoints2.clear();
     Start.Text = "Start";
     Start.col = color(0, 0, 255);
     Start.overCol = color(0, 0, 180);
@@ -146,7 +160,11 @@ void draw() {
 
   for (TextBox t : textBoxes) t.display();
   for (Button b : buttons) b.display();
+  fill(0,0,255);
   for (Datapoint d : datapoints) d.display();
+  fill(255,0,0);
+  for (Datapoint d : datapoints2) d.display();
+  fill(255);
 }
 
 void graph() {
@@ -158,8 +176,8 @@ void graph() {
 void displayInfo() {
   pushMatrix();
   translate(width/2, height/2);
-  
-  background(255);
+
+  //background(255);
   // Display current status of populationation
 
   //textFont(f);
@@ -171,25 +189,24 @@ void displayInfo() {
   text("Score:", 300, -500);
   textSize(40);
   textSize(18);
-  
-  if (firsttime == false){    
-  text("Average fitness:        " + nf(population.getAverageFitness(), 0, 2), 300, -420);
-  text("Best score:                " + worldrecord, 300, -380);
-  text("Total generations:     " + population.getGenerations(), 300, -440);
-  }
-  else {
+
+  if (firsttime == false) {    
+    text("Average fitness:        " + nf(population.getAverageFitness(), 0, 2), 300, -420);
+    text("Best score:                " + worldrecord, 300, -380);
+    text("Total generations:     " + population.getGenerations(), 300, -440);
+  } else {
     recordGenes = "0";
     worldrecord = 0;
-  text("Average fitness:        " + 0, 300, -420);
-  text("Best score:                " + worldrecord, 300, -380);
+    text("Average fitness:        " + 0, 300, -420);
+    text("Best score:                " + worldrecord, 300, -380);
   }
-  
+
   text("Total population:      " + popmax, 300, -400);
   text("Mutation rate:           " + mutationRate * 100 + "%", 300, -360);
   text("Binary genecode:       "+ recordGenes, 300, -340);
-  
+
   textSize(10);
-  image(logo,(1920/2)-150,-541);
+  image(logo, (1920/2)-150, -541);
   translate(0, 0);
   popMatrix();
 }
@@ -217,6 +234,7 @@ void Graph() {
   textSize(30);
   text("generationer", width-400, height-100);
   text("værdi", 50, 300);
-  
+
   datapoints.add(new Datapoint(5*population.getGenerations()+200, height-170-int(worldrecord)/2));
+  datapoints2.add(new Datapoint(5*population.getGenerations()+200, height-170));
 }
