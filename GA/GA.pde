@@ -100,13 +100,13 @@ void draw() {
       Start.col = color(255, 0, 0);
       Start.overCol = color(180, 0, 0);
 
-      // Generate mating pool
+      // jeanrate mating pool
       population.naturalSelection();
-      //Create next generation
-      population.generate();
+      //Create next jeanration
+      population.jeanrate();
       // Calculate fitness
       population.calcFitness();
-      population.getGenes();
+      population.getjeans();
       displayInfo();
 
       // If we found the target phrase, stop
@@ -138,7 +138,7 @@ void draw() {
 
 void graph() {
   for (int i =0; i<population.population.length; i++) {
-    circle(population.getGenerations(), population.population[i].fitness, 10);
+    circle(population.getjeanrations(), population.population[i].fitness, 10);
   }
 }
 
@@ -158,7 +158,7 @@ void displayInfo() {
   text("Score:", 300, -500);
   textSize(40);
   textSize(18);
-  text("Total generations:     " + population.getGenerations(), 300, -440);
+  text("Total jeanrations:     " + population.getjeanrations(), 300, -440);
   if (firsttime == true){
   text("Average fitness:        " + nf(population.getAverageFitness(), 0, 2), 300, -420);
   text("Best score:                " + worldrecord, 300, -380);
@@ -169,7 +169,7 @@ void displayInfo() {
   }
   text("Total population:      " + popmax, 300, -400);
   text("Mutation rate:           " + mutationRate * 100 + "%", 300, -360);
-  text("Binary genecode:       "+ recordGenes, 300, -340);
+  text("Binary jean code:       "+ recordjeans, 300, -340);
   
   textSize(10);
 

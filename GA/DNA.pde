@@ -1,21 +1,21 @@
 class DNA {
 
-  // The genetic sequence
-  boolean[] genes;
+  // The jeantic sequence
+  boolean[] jeans;
   boolean RB;
   int randomNUM;
   public float fitness;
-  public String recordGenes;
+  public String recordjeans;
 
   // Constructor (makes a random DNA)
   DNA(int num) {
-    genes = new boolean[num];
-    for (int i = 0; i < genes.length; i++) {
+    jeans = new boolean[num];
+    for (int i = 0; i < jeans.length; i++) {
       randomNUM = (int)random(0, 10);
       if (randomNUM <= 5) {
-        genes[i]=false;
+        jeans[i]=false;
       } else {
-        genes[i] = true;  // Pick from range of chars
+        jeans[i] = true;  // Pick from range of chars
       }
     }
   }
@@ -23,15 +23,15 @@ class DNA {
   // Converts character array to a String
   /*
   String getPhrase() {
-   return new String(genes);
+   return new String(jeans);
    }
    */
   // Fitness function (returns floating point % of "correct" characters)
   void fitness () {
     int localscore = 0;
     int localweight = 0;
-    for (int i = 0; i < genes.length; i++) {
-      if (genes[i] == true) { 
+    for (int i = 0; i < jeans.length; i++) {
+      if (jeans[i] == true) { 
         localscore += objects[i].y;
         localweight += objects[i].x;
       }
@@ -47,42 +47,42 @@ class DNA {
   }
   
   String components(){
-    String binaryGenes = "";
-    for(int i=0; i<genes.length; i++){
-      if(genes[i])
-      binaryGenes += '1';
+    String binaryjeans = "";
+    for(int i=0; i<jeans.length; i++){
+      if(jeans[i])
+      binaryjeans += '1';
       else
-      binaryGenes += '0';
+      binaryjeans += '0';
     }
-    recordGenes = (String)binaryGenes;
-    return recordGenes;
+    recordjeans = (String)binaryjeans;
+    return recordjeans;
   }
 
   // Crossover
   DNA crossover(DNA partner) {
     // A new child
-    DNA child = new DNA(genes.length);
+    DNA child = new DNA(jeans.length);
 
-    int midpoint = int(random(genes.length)); // Pick a midpoint
+    int midpoint = int(random(jeans.length)); // Pick a midpoint
 
     // Half from one, half from the other
-    for (int i = 0; i < genes.length; i++) {
-      if (i > midpoint) child.genes[i] = genes[i];
-      else              child.genes[i] = partner.genes[i];
+    for (int i = 0; i < jeans.length; i++) {
+      if (i > midpoint) child.jeans[i] = jeans[i];
+      else              child.jeans[i] = partner.jeans[i];
     }
     return child;
   }
 
   // Based on a mutation probability, picks a new random character
   void mutate(float mutationRate) {
-    for (int i = 0; i < genes.length; i++) {
+    for (int i = 0; i < jeans.length; i++) {
       if (random(1) < mutationRate) {
         randomNUM = (int)random(0, 1);
         if (randomNUM ==1) {
-          genes[i]=false;
+          jeans[i]=false;
         } else {
         }
-        genes[i] = true;  // Pick from range of chars
+        jeans[i] = true;  // Pick from range of chars
       }
     }
   }

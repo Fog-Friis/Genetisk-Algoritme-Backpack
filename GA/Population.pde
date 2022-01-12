@@ -1,11 +1,11 @@
 float worldrecord;
-String recordGenes;
+String recordjeans;
 class Population {
   float mutationRate;           // Mutation rate
   DNA[] population;             // Array to hold the current population
   ArrayList<DNA> matingPool;    // ArrayList which we will use for our "mating pool"
   String target;                // Target phrase
-  int generations;              // Number of generations
+  int jeanrations;              // Number of jeanrations
   boolean finished;             // Are we finished evolving?
   int perfectScore;
 
@@ -18,12 +18,12 @@ class Population {
     calcFitness();
     matingPool = new ArrayList<DNA>();
     finished = false;
-    generations = 0;
+    jeanrations = 0;
     
     perfectScore = 1;
   }
   
-  void getGenes() {
+  void getjeans() {
     for (int i = 0; i < population.length; i++) {
       population[i].components();
     }
@@ -37,7 +37,7 @@ class Population {
     wrecord();
   }
 
-  // Generate a mating pool
+  // jeanrate a mating pool
   void naturalSelection() {
     // Clear the ArrayList
     matingPool.clear();
@@ -62,8 +62,8 @@ class Population {
     }
   }
 
-  // Create a new generation
-  void generate() {
+  // Create a new jeanration
+  void jeanrate() {
     // Refill the population with children from the mating pool
     for (int i = 0; i < population.length; i++) {
       int a = int(random(matingPool.size()));
@@ -74,7 +74,7 @@ class Population {
       child.mutate(mutationRate);
       population[i] = child;
     }
-    generations++;
+    jeanrations++;
   }
 
   void wrecord() {
@@ -84,7 +84,7 @@ class Population {
       if (population[i].fitness > worldrecord) {
         index = i;
         worldrecord = population[i].fitness;
-        recordGenes = population[i].components();
+        recordjeans = population[i].components();
       }
   }
   return;
@@ -96,8 +96,8 @@ class Population {
     return finished;
   }
 
-  int getGenerations() {
-    return generations;
+  int getjeanrations() {
+    return jeanrations;
   }
 
   // Compute average fitness for the population
