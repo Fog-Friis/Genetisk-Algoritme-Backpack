@@ -2,7 +2,6 @@ class DNA {
 
   // The genetic sequence
   boolean[] genes;
-  boolean RB;
   int randomNUM;
   public float fitness;
   public String recordGenes;
@@ -13,7 +12,7 @@ class DNA {
     for (int i = 0; i < genes.length; i++) {
       randomNUM = (int)random(0, 10); //Laver en 50/50 chance for at den er sand eller falsk
       if (randomNUM <= 5) { 
-        genes[i]=false; // IKke i rægsækken
+        genes[i]=false; // ikke i rygsækken
       } else {
         genes[i] = true;  //er i rygsækken
       }

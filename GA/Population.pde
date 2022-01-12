@@ -7,7 +7,6 @@ class Population {
   String target;                // Target phrase
   int generations;              // Number of generations
   boolean finished;             // Are we finished evolving?
-  int perfectScore;
 
   Population(float m, int num) {
     mutationRate = m;
@@ -19,8 +18,6 @@ class Population {
     matingPool = new ArrayList<DNA>();
     finished = false;
     generations = 0;
-    
-    perfectScore = 1;
   }
   
   void getGenes() {
