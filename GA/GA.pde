@@ -19,7 +19,7 @@ void setup() {
   frameRate(400);
   fullScreen();
   f = createFont("Courier", 32, true);
-  popmax = 150;
+  popmax = 100;
   logo = loadImage("minilogo.jpg");
   populationTB = new TextBox(new PVector(350, 50), new PVector(400, 70));
   mutationRateTB = new TextBox(new PVector(350, 150), new PVector(400, 70));
@@ -33,7 +33,7 @@ void setup() {
   buttons.add(Save);
   buttons.add(Pause);
 
-  mutationRate = 0.1; 
+  mutationRate = 0.001; 
   mutationRateTB.Text = String.valueOf(mutationRate*100);
   populationTB.Text = String.valueOf(popmax);
 
@@ -91,7 +91,7 @@ void draw() {
   if (Save.clicked) {
     worldrecord = 0;
     simulate = false;
-
+ //<>//
     firsttime = true; 
     mutationRate = float(mutationRateTB.Text + "f")/100;  //<>//
     popmax = int(populationTB.Text);
