@@ -91,10 +91,19 @@ void draw() {
   if (Save.clicked) {
     worldrecord = 0;
     simulate = false;
+
     firsttime = false;
     mutationRate = float(mutationRateTB.Text + "f")/100;  //<>//
     popmax = int(populationTB.Text);
   }
+
+    firsttime = true;
+    mutationRate = float(mutationRateTB.Text + "f")/100; 
+   // println(mutationRate);
+    popmax = int(populationTB.Text); //<>//
+
+  } 
+
 
   if (Pause.clicked) {
     paused = !paused;
