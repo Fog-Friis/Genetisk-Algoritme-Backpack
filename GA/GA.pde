@@ -7,7 +7,7 @@ int popmax;
 float mutationRate;
 Population population;
 PVector objects[];
-boolean firsttime = false;
+boolean firsttime = true;
 
 ArrayList<TextBox> textBoxes = new ArrayList<TextBox>();
 ArrayList<Button> buttons = new ArrayList<Button>();
@@ -63,7 +63,7 @@ void setup() {
   objects[23] = new PVector(2000, 150);
 
   //Laver en populationation med en mutation rate and populationation størrelse
-  population = new Population(mutationRate, popmax);
+ // population = new Population(mutationRate, popmax);
 }
 
 void mousePressed() {
@@ -81,27 +81,35 @@ void draw() {
   background(255);
 
   if (Start.clicked) {
+    
     simulate = !simulate;
     firsttime = true;
+    
   }
 
   if (Save.clicked) {
+    worldrecord = 0;
     simulate = false;
     firsttime = false;
-    mutationRate = float(mutationRateTB.Text + "f")/100;
+    mutationRate = float(mutationRateTB.Text + "f")/100; //<>//
    // println(mutationRate);
     popmax = int(populationTB.Text);
-    population = new Population(mutationRate, popmax);
+   // population = new Population(mutationRate, popmax);
   } //<>// //<>//
 
   if (simulate) {
-
+    if (firsttime == true){
+      worldrecord = 0;
+      population = new Population(mutationRate, popmax);
+      firsttime = false;
+  }
     if (int(populationTB.Text) != 0) {
       Start.Text = "Stop";
       Start.col = color(255, 0, 0);
       Start.overCol = color(180, 0, 0);
 
       // Generate mating pool
+      
       population.naturalSelection();
       //Create next generation
       population.generate();
@@ -109,6 +117,7 @@ void draw() {
       population.calcFitness();
       population.getGenes();
       //Opdatter infomartion
+      
       displayInfo();
 
       // If population finished
@@ -162,15 +171,19 @@ void displayInfo() {
   text("Score:", 300, -500);
   textSize(40);
   textSize(18);
-  text("Total generations:     " + population.getGenerations(), 300, -440);
-  if (firsttime == true){
+  
+  if (firsttime == false){    
   text("Average fitness:        " + nf(population.getAverageFitness(), 0, 2), 300, -420);
   text("Best score:                " + worldrecord, 300, -380);
+  text("Total generations:     " + population.getGenerations(), 300, -440);
   }
   else {
+    recordGenes = "0";
+    worldrecord = 0;
   text("Average fitness:        " + 0, 300, -420);
-  text("Best score:                " + 0, 300, -380);
+  text("Best score:                " + worldrecord, 300, -380);
   }
+  
   text("Total population:      " + popmax, 300, -400);
   text("Mutation rate:           " + mutationRate * 100 + "%", 300, -360);
   text("Binary genecode:       "+ recordGenes, 300, -340);
