@@ -11,6 +11,7 @@ boolean firsttime = false;
 
 ArrayList<TextBox> textBoxes = new ArrayList<TextBox>();
 ArrayList<Button> buttons = new ArrayList<Button>();
+ArrayList<Datapoint> datapoints = new ArrayList<Datapoint>();
 
 Button Start, Save;
 TextBox populationTB, mutationRateTB;
@@ -122,6 +123,7 @@ void draw() {
       fill(0);
     }
   } else {
+    datapoints.clear();
     Start.Text = "Start";
     Start.col = color(0, 0, 255);
     Start.overCol = color(0, 0, 180);
@@ -135,6 +137,7 @@ void draw() {
 
   for (TextBox t : textBoxes) t.display();
   for (Button b : buttons) b.display();
+  for (Datapoint d : datapoints) d.display();
 }
 
 void graph() {
@@ -187,7 +190,7 @@ void Graph() {
   triangle(width-200, height-170, width-220, height-180, width-220, height-160);
   for (int i = 200; i<width-975; i+=25) {
     rect(2*i-200, height-175, 1, 10);
-    text(i-200, 2*i-195, height-155);
+    text(10*i/25-80, 2*i-195, height-155);
   }
 
   //2. akse
@@ -201,4 +204,6 @@ void Graph() {
   textSize(30);
   text("generationer", width-400, height-100);
   text("værdi", 50, 300);
+  
+  datapoints.add(new Datapoint(5*population.getGenerations()+200, height-170-int(worldrecord)/2));
 }
