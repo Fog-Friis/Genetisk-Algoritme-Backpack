@@ -1,5 +1,5 @@
 Boolean simulate = false;
-
+PImage logo;
 PFont f;
 int score;
 int weight;
@@ -20,7 +20,7 @@ void setup() {
   fullScreen();
   f = createFont("Courier", 32, true);
   popmax = 150;
-
+  logo = loadImage("minilogo.jpg");
   populationTB = new TextBox(new PVector(350, 50), new PVector(400, 70));
   mutationRateTB = new TextBox(new PVector(350, 150), new PVector(400, 70));
   textBoxes.add(populationTB);
@@ -91,7 +91,7 @@ void draw() {
    // println(mutationRate);
     popmax = int(populationTB.Text);
     population = new Population(mutationRate, popmax);
-  } //<>//
+  } //<>// //<>//
 
   if (simulate) {
 
@@ -173,7 +173,7 @@ void displayInfo() {
   text("Binary genecode:       "+ recordGenes, 300, -340);
   
   textSize(10);
-
+  image(logo,(1920/2)-150,-541);
   translate(0, 0);
   popMatrix();
 }
