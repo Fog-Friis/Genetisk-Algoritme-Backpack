@@ -1,4 +1,4 @@
-float worldrecord;
+float worldrecord = 0;
 String recordGenes;
 class Population {
   float mutationRate;           // Mutation rate
@@ -78,7 +78,6 @@ class Population {
   }
 
   void wrecord() {
-    worldrecord = 0.0;
     int index;
     for (int i = 0; i < population.length; i++) {
       if (population[i].fitness > worldrecord) {

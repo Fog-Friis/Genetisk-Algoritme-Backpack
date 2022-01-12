@@ -7,26 +7,21 @@ class DNA {
   public float fitness;
   public String recordGenes;
 
-  // Constructor (makes a random DNA)
+  // Laver en tilfældig DNA 
   DNA(int num) {
     genes = new boolean[num];
     for (int i = 0; i < genes.length; i++) {
-      randomNUM = (int)random(0, 10);
-      if (randomNUM <= 5) {
-        genes[i]=false;
+      randomNUM = (int)random(0, 10); //Laver en 50/50 chance for at den er sand eller falsk
+      if (randomNUM <= 5) { 
+        genes[i]=false; // IKke i rægsækken
       } else {
-        genes[i] = true;  // Pick from range of chars
+        genes[i] = true;  //er i rygsækken
       }
     }
   }
 
-  // Converts character array to a String
-  /*
-  String getPhrase() {
-   return new String(genes);
-   }
-   */
-  // Fitness function (returns floating point % of "correct" characters)
+
+  // Fitness funktion (returner int)
   void fitness () {
     int localscore = 0;
     int localweight = 0;
